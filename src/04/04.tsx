@@ -21,7 +21,7 @@ const courses = [
 
 
 const chipPredicate = (course: CourseType) => {
-return course.price < 160
-}
+    return course.price < 160;
+};
 
-const chipCourses = []
+const chipCourses = [];
