@@ -3,7 +3,7 @@ let user = {
     age: 32
 }
 
-function icreaseAge(user:any){
-    user.age++;
-}
-
+// function icreaseAge(user:any){
+//     user.age++;
+// }
+//
