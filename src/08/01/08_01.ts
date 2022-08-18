@@ -1,5 +1,5 @@
 
-type UsersType = {
+export type UsersType = {
     [key: string]: {id:number, name:string}
 
 }

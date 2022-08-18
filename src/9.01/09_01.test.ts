@@ -1,4 +1,4 @@
-function icreaseAge(u: UserType) {
+export function icreaseAge(u: UserType) {
     u.age++;
 }
 
