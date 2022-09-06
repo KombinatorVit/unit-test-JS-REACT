@@ -1,23 +1,30 @@
-
 export type UserType = {
     name: string
     hair: number
-    address: {title: string}
+    address: { title: string }
 }
-function hairdresser(u:UserType, power: number) {
-    const copy = {...u}
-    copy.hair = u.hair / power
-    test('reference type test', ()=> {
-        let user:UserType = {
-            name:'Dimych',
-            hair :32,
-            address: {
-                title:'Minsk'
-            }
+
+function makeHairstyle(u: UserType, power: number) {
+    const copy = {...u,
+        hair : u.hair / power
+    };
+    return copy;
+}
+
+test('reference type test', () => {
+    let user: UserType = {
+        name: 'Dimych',
+        hair: 32,
+        address: {
+            title: 'Minsk'
         }
+    };
 
-        hairdresser(user, 2)
+    const awesomeUse = makeHairstyle(user, 2);
 
-        expect(user.hair).toBe(16)
-    })
-}
+
+    expect(user.hair).toBe(32);
+    expect(awesomeUse.hair).toBe(16);
+    expect(awesomeUse.address).toBe(user.address);
+
+});
