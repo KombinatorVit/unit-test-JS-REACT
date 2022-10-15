@@ -20,11 +20,11 @@ test('reference type test', () => {
         }
     };
 
-    const awesomeUse = makeHairstyle(user, 2);
+    const awesomeUser = makeHairstyle(user, 2);
 
 
     expect(user.hair).toBe(32);
-    expect(awesomeUse.hair).toBe(16);
-    expect(awesomeUse.address).toBe(user.address);
+    expect(awesomeUser.hair).toBe(16);
+    expect(awesomeUser.address).toBe(user.address);
 
 });
