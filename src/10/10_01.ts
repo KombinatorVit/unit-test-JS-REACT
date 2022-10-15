@@ -25,3 +25,9 @@ export function moveUser(u: UserWithLaptopType, newCity: string){
     };
     return copy2;
 }
+
+
+export function upgradeUserLaptop(u: UserWithLaptopType, newComp: string){
+    return {...u, laptop: {...u.laptop, title: newComp}
+    };
+}
