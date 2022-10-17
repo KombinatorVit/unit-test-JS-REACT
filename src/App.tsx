@@ -1,34 +1,26 @@
 import React from 'react';
+import Count from './components/Count';
+import IsFive from './components/IsFive';
 
 function App() {
-    const [numbers, setNumbers] = React.useState([1, 2, 3, 4, 5]);
-    const timerRef = React.useRef<any>();
-
-    const addNumber = () => {
-        setNumbers((prev) => [...prev, prev[prev.length - 1] + 1]);
-    };
-
-    const start = () => {
-
-            timerRef.current = setInterval(addNumber, 1000)
-
-    };
-
-    const stop = () => {
-        console.log(timerRef.current);
-        clearInterval(timerRef.current);
-    };
+    const [count1, setCount1] = React.useState(0);
+    const [count2, setCount2] = React.useState(0);
 
     return (
-        <div>
-            <ul>
-                {numbers.map((n) => (
-                    <li key={n}>{n}</li>
-                ))}
-            </ul>
-            <button onClick={addNumber}>✅ Добавить число</button>
-            <button onClick={start}>▶️ Старт</button>
-            <button onClick={stop}>⏹ Стоп</button>
+        <div className="App">
+
+            <h5>Счетчик 1: </h5>
+            <div className="counter">
+                <button onClick={() => setCount1(count1 + 1)}>+</button>
+                <Count id={1} value={count1} />
+            </div>
+
+            <h5>Счетчик 2: </h5>
+            <div className="counter">
+                <button onClick={() => setCount2(count2 + 1)}>+</button>
+                <Count id={2} value={count2} />
+                <IsFive value={count2} />
+            </div>
         </div>
     );
 }
