@@ -3,7 +3,7 @@ import {
     addNewBooksToUser,
     makeHairstyle,
     moveUser,
-    moveUserToOtherHouse, removeBook, updateBook, updateCompanyTitle,
+    moveUserToOtherHouse, removeBook, updateBook, updateCompanyTitle, updateCompanyTitle2,
     upgradeUserLaptop,
     UserWithBooksType,
     UserWithLaptopType, WithCompanyType
@@ -14,7 +14,6 @@ export type UserType = {
     hair: number
     address: { city: string, house: number }
 }
-
 
 
 test('reference type test', () => {
@@ -58,7 +57,7 @@ test('change address', () => {
     expect(user.laptop).toBe(movedUser.laptop);
     expect(movedUser.address.city).toBe('Kiev');
 
-})
+});
 
 
 test('upgrade laptop to macbook', () => {
@@ -83,7 +82,7 @@ test('upgrade laptop to macbook', () => {
     expect(userCopy.laptop.title).toBe('Macbook');
     expect(user.laptop.title).toBe('ZenBook');
 
-})
+});
 
 test('upgrade laptop to macbook2', () => {
     let user: UserWithLaptopType & UserWithBooksType = {
@@ -109,7 +108,7 @@ test('upgrade laptop to macbook2', () => {
     expect(userCopy.address.house).toBe(99);
 
 
-})
+});
 
 test('add new books to user', () => {
     let user: UserWithLaptopType & UserWithBooksType = {
@@ -132,10 +131,10 @@ test('add new books to user', () => {
     expect(user.laptop).toBe(userCopy.laptop);
     expect(user.address).toBe(userCopy.address);
     expect(user.books).not.toBe(userCopy.books);
-    expect(userCopy.books[4]).toBe('ts')
-    expect(user.books.length).toBe(4)
+    expect(userCopy.books[4]).toBe('ts');
+    expect(user.books.length).toBe(4);
 
-})
+});
 
 test('update js to ts', () => {
     let user: UserWithLaptopType & UserWithBooksType = {
@@ -151,16 +150,16 @@ test('update js to ts', () => {
         books: ['css', 'html', 'js', 'react']
     };
 
-    const userCopy = updateBook(user, 'js','ts');
+    const userCopy = updateBook(user, 'js', 'ts');
 
 
     expect(user).not.toBe(userCopy);
     expect(user.laptop).toBe(userCopy.laptop);
     expect(user.address).toBe(userCopy.address);
     expect(user.books).not.toBe(userCopy.books);
-    expect(userCopy.books[2]).toBe('ts')
+    expect(userCopy.books[2]).toBe('ts');
 
-})
+});
 
 test('remove js', () => {
     let user: UserWithLaptopType & UserWithBooksType = {
@@ -183,9 +182,9 @@ test('remove js', () => {
     expect(user.laptop).toBe(userCopy.laptop);
     expect(user.address).toBe(userCopy.address);
     expect(user.books).not.toBe(userCopy.books);
-    expect(userCopy.books[2]).toBe('react')
+    expect(userCopy.books[2]).toBe('react');
 
-})
+});
 
 test('addNewCompan', () => {
     let user: UserWithLaptopType & WithCompanyType = {
@@ -198,18 +197,18 @@ test('addNewCompan', () => {
         laptop: {
             title: 'ZenBook'
         },
-companies: [{id: 1, title: 'Epam'}, {id: 2, title: 'IT-INCUBATOR'}]
-    }
+        companies: [{id: 1, title: 'Epam'}, {id: 2, title: 'IT-INCUBATOR'}]
+    };
 
-const userCopy = addCompany(user, {id:3, title: 'ATB'})
+    const userCopy = addCompany(user, {id: 3, title: 'ATB'});
 
     expect(user.laptop).toBe(userCopy.laptop);
     expect(user.address).toBe(userCopy.address);
-    expect(userCopy.companies.length).toBe(3)
+    expect(userCopy.companies.length).toBe(3);
     expect(userCopy.companies[2].id).toBe(3);
     expect(userCopy.companies[2].title).toBe('ATB');
 
-})
+});
 
 test('update company', () => {
     let user: UserWithLaptopType & WithCompanyType = {
@@ -223,9 +222,9 @@ test('update company', () => {
             title: 'ZenBook'
         },
         companies: [{id: 1, title: 'Epa'}, {id: 2, title: 'IT-INCUBATOR'}]
-    }
+    };
 
-    const userCopy = updateCompanyTitle(user, 1 , 'Epam')
+    const userCopy = updateCompanyTitle(user, 1, 'Epam');
 
     expect(user).not.toBe(userCopy);
     expect(user.address).toBe(userCopy.address);
@@ -233,4 +232,20 @@ test('update company', () => {
     expect(userCopy.companies[0].title).toBe('Epam');
 
 
-})
+});
+
+test('update company', () => {
+
+
+    const companies = {
+        'Dimych': [{id: 1, title: 'Epa'}, {id: 2, title: 'IT-INCUBATOR'}],
+        'Artem': [{id: 2, title: 'IT-INCUBATOR'}]
+    };
+
+   const copy =  updateCompanyTitle2(companies, 'Dimych', 1, 'EPAM' )
+
+
+    expect(copy['Dimych']).not.toBe(companies['Dimych'])
+    expect(copy['Artem']).toBe(companies['Artem'])
+    expect(copy['Dimych'][0].title).toBe('EPAM')
+});

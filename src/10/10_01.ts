@@ -68,14 +68,25 @@ export const removeBook = (u: UserWithLaptopType & UserWithBooksType, remBook: s
 
 );
 
-export function addCompany(u: UserWithLaptopType & WithCompanyType, newComp:{id:number, title: string}) {
-    return{
+export function addCompany(u: UserWithLaptopType & WithCompanyType, newComp: { id: number, title: string }) {
+    return {
         ...u, companies: [...u.companies, newComp]
-    }
+    };
 }
 
 export function updateCompanyTitle(u: UserWithLaptopType & WithCompanyType, id: number, newTitle: string) {
     return {
-        ...u, companies: u.companies.map(t => t.id === id ? {...t, title:newTitle} : t)
+        ...u, companies: u.companies.map(t => t.id === id ? {...t, title: newTitle} : t)
     };
 }
+
+export const updateCompanyTitle2 = (companies: {[key: string]:Array<{id: number, title: string}>},
+                                    userName: string,
+                                    companyId: number,
+                                    newTitle: string) => {
+
+    let companyCopy = {...companies};
+
+    companyCopy[userName] = companyCopy[userName].map(c => c.id === companyId ? {...c, title: newTitle}: c)
+    return companyCopy;
+};
